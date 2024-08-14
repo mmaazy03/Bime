@@ -9,11 +9,9 @@ import i18nInit from './src/i18n/config/i18n.config'; // <-- this line added
 import {Provider} from 'react-redux';
 import store from './src/store/index';
 import messaging from '@react-native-firebase/messaging';
+import {setBackgroundMessageHandler} from '@hooks';
 
-messaging().setBackgroundMessageHandler(async remoteMessage => {
-  // ?? Don't need to throw any push notification in background state and quit state on ios
-  // ?? Will use this only to update application state
-});
+messaging().setBackgroundMessageHandler(setBackgroundMessageHandler);
 
 (async () => {
   const language = 'en';

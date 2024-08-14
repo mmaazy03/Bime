@@ -5,7 +5,7 @@ import {isAndroid, isIOS} from '@constants';
 import {onThrowPushNotification} from '../helpers';
 import {AppState} from 'react-native';
 
-const Notifications = () => {
+const useNotifications = () => {
   const appState = useRef(AppState.currentState);
 
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
@@ -40,50 +40,54 @@ const Notifications = () => {
   //   UNKNOWN: -1,
   // };
 
-  useEffect(() => {
-    // ?? IN ORDER TO HANDLE PUSH NOTIFICATIONS WILL USE THESE METHODS
-    notifee.onForegroundEvent(({type, detail}) => {
-      const data = detail?.notification?.data;
+  // useEffect(() => {
+  //   // ?? IN ORDER TO HANDLE PUSH NOTIFICATIONS WILL USE THESE METHODS
+  //   notifee.onForegroundEvent(({ type, detail }) => {
+  //     const data = detail?.notification?.data;
 
-      if (isIOS) {
-        switch (type) {
-          case EventType.DELIVERED:
-            break;
+  //     if (isIOS) {
+  //       switch (type) {
+  //         case EventType.DELIVERED:
+  //           /** Handle Notification */
+  //           onReceivedNotification(data);
 
-          case EventType.DISMISSED:
-            break;
+  //           break;
 
-          case EventType.PRESS:
-            notificationPress({...type, ...detail});
+  //         case EventType.DISMISSED:
+  //           break;
 
-            break;
-        }
-      } else {
-        if (type === 1) {
-          // ?? IN ANDROID FOR FROEGROUND PUSH NOTIFICATION HANDLING WILL USE THIS
-          notificationPress({...type, ...detail});
-        }
-      }
-    });
+  //         case EventType.PRESS:
+  //           notificationPress({ ...type, ...detail });
 
-    if (isIOS) {
-      notifee.onBackgroundEvent(({type, detail}) => {
-        const data = detail?.notification?.data;
+  //           break;
+  //       }
+  //     } else {
+  //       if (type === 1) {
+  //         // ?? IN ANDROID FOR FROEGROUND PUSH NOTIFICATION HANDLING WILL USE THIS
+  //         notificationPress({ ...type, ...detail });
+  //       }
+  //     }
+  //   });
 
-        switch (type) {
-          case EventType.DELIVERED:
-            break;
+  //   if (isIOS) {
+  //     notifee.onBackgroundEvent(({ type, detail }) => {
+  //       const data = detail?.notification?.data;
+  //       appLogger('backnground');
 
-          case EventType.DISMISSED:
-            break;
+  //       switch (type) {
+  //         case EventType.DELIVERED:
+  //           break;
 
-          case EventType.PRESS:
-            notificationPress({...type, ...detail});
-            break;
-        }
-      });
-    }
-  }, []);
+  //         case EventType.DISMISSED:
+  //           break;
+
+  //         case EventType.PRESS:
+  //           notificationPress({ ...type, ...detail });
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
@@ -112,8 +116,10 @@ const Notifications = () => {
     notifee.setBadgeCount(0);
     const pushNotificationSubscription = messaging().onMessage(
       async remoteMessage => {
-        const {data} = remoteMessage;
+        const {data, notification} = remoteMessage;
         const {title, body}: {title: string; body: string} = data;
+
+        onReceivedNotification(data);
 
         if (appStateVisible === 'active' || appStateVisible === 'unknown') {
           if (isIOS && !hasAppOpenedFromBackground) {
@@ -125,28 +131,28 @@ const Notifications = () => {
       },
     );
 
-    messaging().onNotificationOpenedApp(async remoteMessage => {
-      // ?? RUN ANY ACTION WHEN YOU OPEN APPLICATION FROM PUSH NOTIFICATION IN BACKGROUND STATE (ONLY RUNS IN ANDROID)
-      isAndroid && notificationPress(remoteMessage);
-    });
+    // messaging().onNotificationOpenedApp(async (remoteMessage) => {
+    //   // ?? RUN ANY ACTION WHEN YOU OPEN APPLICATION FROM PUSH NOTIFICATION IN BACKGROUND STATE (ONLY RUNS IN ANDROID)
+    //   isAndroid && notificationPress(remoteMessage);
+    // });
 
-    messaging()
-      .getInitialNotification()
-      // ?? RUN ANY ACTION WHEN YOU OPEN APPLICATION FROM PUSH NOTIFICATION IN QUIT STATE (ONLY RUNS IN ANDROID)
-      .then(res => {
-        if (res) {
-          notificationPress(res);
-        }
-      })
-      .catch(err => {});
+    //   messaging()
+    //     .getInitialNotification()
+    //     // ?? RUN ANY ACTION WHEN YOU OPEN APPLICATION FROM PUSH NOTIFICATION IN QUIT STATE (ONLY RUNS IN ANDROID)
+    //     .then((res) => {
+    //       if (res) {
+    //         notificationPress(res);
+    //       }
+    //     })
+    //     .catch((err) => {});
 
     return pushNotificationSubscription;
   }, []);
 
-  const notificationPress = data => {
-    // ?? This function will run in case when notification is pressed in any state of both platforms
-    // ?? left for future purposes
-  };
+  // const notificationPress = (data) => {
+  //   // ?? This function will run in case when notification is pressed in any state of both platforms
+  //   // ?? left for future purposes
+  // };
 
   const requestTokenPermission = async () => {
     await notifee.requestPermission({sound: true});
@@ -166,4 +172,4 @@ const Notifications = () => {
   };
 };
 
-export default Notifications;
+export default useNotifications;
