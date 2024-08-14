@@ -1,0 +1,16 @@
+{
+  "CAPTURE_ID_SCAN": "CAPTURE ID SCAN",
+  "CHANGE_LANGUAGE": "Change Language",
+  "DELIVERY": "Delivery",
+  "DELIVERIES": "Deliveries",
+  "LOCATION_PERMISSION_MESSAGE": "App needs access to your Location for better experience.",
+  "LOCATION_PERMISSION_NEUTRAL_BUTTON": "Ask Me Later",
+  "LOCATION_PERMISSION_NEGATIVE_BUTTON": "Cancel",
+  "LOCATION_PERMISSION_POSITIVE_BUTTON": "OK",
+  "LOCATION_PERMISSION_DENIED_TITLE": "This app requires location access",
+  "LOCATION_PERMISSION_DENIED_MESSAGE": "Go to settings and and allow location permissions to proceed",
+  "CAMERA_PERMISSION_DENIED_TITLE": "This app requires camera access",
+  "CAMERA_PERMISSION_DENIED_MESSAGE": "Go to settings and and allow camera permissions to proceed",
+  "SETTINGS": "Settings",
+  "CANCEL": "Cancel"
+}

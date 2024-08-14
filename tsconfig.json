@@ -1,0 +1,35 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "baseUrl": ".",
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@navigation/*": ["./src/navigation/*"],
+      "@components": ["./src/components/index"],
+      "@constants": ["./src/constants/index"],
+      "@pages": ["./src/pages/index"],
+      "@theme": ["./src/theme/R"],
+      "@containers/*": ["./src/containers/*"],
+      "@assets": ["./src/assets/index"],
+      "@config/*": ["./src/config"],
+      "@store/*": ["./src/store/*"],
+      "@axios/*": ["./src/axios"],
+      "@translations/*": ["./src/translations"],
+      "@services": ["./src/services/index"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@types": ["./src/types/index"],
+      "@utils": ["./src/utils/index"],
+      "@hooks": ["./src/hooks/index"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "babel.config.js", "metro.config.js"]
+  // "include": ["src/custom.d.ts"],
+}
