@@ -7,6 +7,8 @@ import App from './App';
 import {name as appName} from './app.json';
 import i18nInit from './src/i18n/config/i18n.config'; // <-- this line added
 import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
 import store from './src/store/index';
 import messaging from '@react-native-firebase/messaging';
 import {setBackgroundMessageHandler} from '@hooks';
@@ -28,10 +30,14 @@ function HeadlessCheck({isHeadless}) {
 }
 
 const Main = () => {
+  const persistor = persistStore(store);
+
   return (
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </PersistGate>
   );
 };
 

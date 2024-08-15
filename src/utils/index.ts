@@ -16,6 +16,8 @@ import {
 
 import {validateResponse} from './validations';
 
+import FormValidation from './FormValidation';
+
 export {
   getItem,
   setItem,
@@ -34,4 +36,5 @@ export {
   formatTime,
   validateResponse,
   debounce,
+  FormValidation,
 };

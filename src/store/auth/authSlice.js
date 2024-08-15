@@ -12,14 +12,14 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     authLogin: (state, {payload}) => {
+      console.log(' authLogin payload', payload);
       state.isAuth = true;
     },
     changeRole: (state, {payload}) => {
       state.role = payload;
     },
-    authLogout: (state, {payload}) => {
+    authLogout: state => {
       state.isAuth = false;
-      state.role = 'Member';
     },
   },
   extraReducers: builder => {},

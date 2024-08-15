@@ -6,6 +6,7 @@ const CustomLightTheme = {
     ...DefaultTheme.colors,
     background: '#b91c22',
     primary: 'rgba(255, 45, 85,0.3)',
+    primaryColor1: 'rgba(240,240,240,1)',
   },
 };
 

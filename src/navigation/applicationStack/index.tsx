@@ -9,7 +9,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import R from '@theme';
 import {Icon} from '@components';
-import {CoachesScreen, ChatList, Login, NetworkLoggerView} from '@pages';
+import {
+  FriendsScreen,
+  ChatList,
+  NetworkLoggerView,
+  FriendDetailsScreen,
+} from '@pages';
 import {SCREEN_NAMES} from '@constants';
 import {NavigationService} from '@services';
 
@@ -82,8 +87,15 @@ const AppStack = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={'Coaches'}>
-        <Stack.Screen name="Coaches" component={CoachesScreen} />
+        initialRouteName={'Friends'}>
+        <Stack.Screen
+          name={SCREEN_NAMES.FriendsScreen}
+          component={FriendsScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAMES.FriendDetailsScreen}
+          component={FriendDetailsScreen}
+        />
         <Stack.Screen
           name={SCREEN_NAMES.NetworkLoggerView}
           component={NetworkLoggerView}

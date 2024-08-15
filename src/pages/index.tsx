@@ -4,8 +4,15 @@ import OnBoarding from './authContainer/OnBoarding';
 
 // !! APPLICATION SCREENS
 import ChatList from './appContainer/ChatModule/ChatsListScreen';
-import ChatScreen from './appContainer/ChatModule/ChatScreen';
-import CoachesScreen from './appContainer/CoachesScreen';
+import FriendsScreen from './appContainer/FriendsScreen';
+import FriendDetailsScreen from './appContainer/FriendDetailsScreen';
 import NetworkLoggerView from './network-logger';
 
-export {Login, ChatList, CoachesScreen, OnBoarding, NetworkLoggerView};
+export {
+  Login,
+  ChatList,
+  FriendsScreen,
+  OnBoarding,
+  NetworkLoggerView,
+  FriendDetailsScreen,
+};

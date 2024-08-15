@@ -11,27 +11,25 @@ const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     userLogin: (state, {payload}) => {
-      state.user = payload.user;
+      console.log('P', payload);
+      state.user = payload;
       state.userToken = payload.token;
     },
     updateUser: (state, {payload}) => {
       state.user = payload;
     },
-    userDefaultPaymentMethod: (state, {payload}) => {
-      state.paymentMethod = payload;
-    },
     updateUserToken: (state, {payload}) => {
       state.userToken = payload;
+    },
+    userLogOut: state => {
+      state.user = undefined;
+      state.userToken = undefined;
     },
   },
   extraReducers: builder => {},
 });
 
-export const {
-  userLogin,
-  updateUser,
-  updateUserToken,
-  userDefaultPaymentMethod,
-} = userSlice.actions;
+export const {userLogin, updateUser, updateUserToken, userLogOut} =
+  userSlice.actions;
 
 export default userSlice.reducer;

@@ -15,7 +15,7 @@ const AuthStack = () => {
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         // initialRouteName={common?.isOnBoard ? 'Login' : 'OnBoard'}
-        initialRouteName={'OnBoard'}
+        initialRouteName={'Login'}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="OnBoard" component={OnBoarding} />
         <Stack.Screen name="Login" component={Login} />

@@ -1,7 +1,7 @@
-import {StyleSheet, View} from 'react-native';
 import {Toast} from 'native-base';
-import R from '@theme';
 import {Icon, Text} from '@components';
+import R from '@theme';
+import {StyleSheet, View} from 'react-native';
 
 const PopUp = props => {
   const {
@@ -10,6 +10,7 @@ const PopUp = props => {
     visibilityTime = 3000,
     variant = 'top-accent', // solid, subtle, left-accent, top-accent
     placement = 'top',
+    id = '123',
   } = props;
 
   const popUpTypes = {
@@ -30,53 +31,56 @@ const PopUp = props => {
     },
   };
 
-  Toast.show({
-    title: heading,
-    duration: visibilityTime,
-    variant: variant,
-    placement: placement,
-    render: () => {
-      return (
-        <View style={styles.popUpContainer}>
-          <View
-            style={{
-              backgroundColor: popUpTypes[type].textColor,
-              ...styles.highlightedTab,
-            }}
-          />
-          <View
-            style={{
-              ...R.styles.rowView,
-              backgroundColor: popUpTypes[type].bgColor,
-              ...styles.textView,
-            }}>
+  if (!Toast.isActive(id)) {
+    return Toast.show({
+      id: id,
+      title: heading,
+      duration: visibilityTime,
+      variant: variant,
+      placement: placement,
+      render: () => {
+        return (
+          <View style={styles.popUpContainer}>
             <View
               style={{
                 backgroundColor: popUpTypes[type].textColor,
-                ...styles.iconView,
+                ...styles.highlightedTab,
+              }}
+            />
+            <View
+              style={{
+                ...R.styles.rowView,
+                backgroundColor: popUpTypes[type].bgColor,
+                ...styles.textView,
               }}>
-              <Icon
-                type={'Ionicons'}
-                name={popUpTypes[type].icon}
-                color={R.color.white}
-                size={15}
-              />
+              <View
+                style={{
+                  backgroundColor: popUpTypes[type].textColor,
+                  ...styles.iconView,
+                }}>
+                <Icon
+                  type={'Ionicons'}
+                  name={popUpTypes[type].icon}
+                  color={R.color.white}
+                  size={15}
+                />
+              </View>
+              <Text
+                variant={'body4'}
+                font={'PoppinsRegular'}
+                color={popUpTypes[type].textColor}
+                align={'left'}
+                numberOfLines={5}
+                style={{marginLeft: R.unit.scale(8), width: '80%'}}
+                transform={'none'}>
+                {heading}
+              </Text>
             </View>
-            <Text
-              variant={'body4'}
-              font={'PoppinsRegular'}
-              color={popUpTypes[type].textColor}
-              align={'left'}
-              numberOfLines={5}
-              style={{marginLeft: R.unit.scale(8), width: '80%'}}
-              transform={'none'}>
-              {heading}
-            </Text>
           </View>
-        </View>
-      );
-    },
-  });
+        );
+      },
+    });
+  }
 };
 
 export default PopUp;
@@ -100,6 +104,7 @@ const styles = StyleSheet.create({
     marginVertical: R.unit.scale(10),
     backgroundColor: R.color.white,
     overflow: 'hidden',
+    zIndex: 9999,
     // paddingVertical: 20,
   },
   highlightedTab: {

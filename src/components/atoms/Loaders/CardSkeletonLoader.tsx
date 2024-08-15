@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import R from '@components/utils/R';
+import R from '@theme';
 import {Skeleton} from 'native-base';
 
 function CardSkeletonLoader() {

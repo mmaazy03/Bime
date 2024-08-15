@@ -7,13 +7,14 @@ import {useTheme} from '@react-navigation/native';
 import {
   SearchBar,
   FlatList,
-  Stagger,
   FixedContainer,
   ScreenBoiler,
   MessagesCard,
   Button,
 } from '@components';
 import {CONSTANTS} from '@constants';
+import {authLogout} from '@store/auth/authSlice';
+import {userLogOut} from '@store/user/userSlice';
 
 const ChatsListScreen = props => {
   const {navigation} = props;
@@ -42,7 +43,10 @@ const ChatsListScreen = props => {
     );
   };
 
-  const onToggleTheme = data => {};
+  const onLogOut = () => {
+    dispatch(authLogout());
+    dispatch(userLogOut());
+  };
 
   const onTriggerPostApi = data => {};
 
@@ -51,20 +55,11 @@ const ChatsListScreen = props => {
       {/* <Stagger onPress={onPress} /> */}
       <FixedContainer>
         <Button
-          onPress={onToggleTheme}
-          value={'Toggle theme'}
+          onPress={onLogOut}
+          value={'Log Out'}
           bgColor={colors.primary}
           width={'70%'}
           gutterTop={10}
-          gutterBottom={20}
-          size={'md'}
-        />
-
-        <Button
-          onPress={onTriggerPostApi}
-          value={'POST'}
-          bgColor={colors.border}
-          width={'70%'}
           gutterBottom={20}
           size={'md'}
         />

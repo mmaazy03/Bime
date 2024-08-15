@@ -1,4 +1,4 @@
-import validators from '@components/utils/Validators';
+import validators from './validtors';
 import {PhoneNumberFormat, PhoneNumberUtil} from 'google-libphonenumber';
 
 function FormValidation(data) {

@@ -27,6 +27,7 @@ import {
   TimeDatePicker,
   MessagesCard,
   NotificationCard,
+  FriendCard,
 } from './organisms';
 
 import {
@@ -77,4 +78,5 @@ export {
   ScrollContainer,
   Alert,
   NetworkLoggerWidget,
+  FriendCard,
 };
